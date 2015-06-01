@@ -15,7 +15,8 @@
   (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  :-)
+  (let [[val1 x val2] v]
+    (+ val1 val2)))
 
 (defn point [x y]
   [x y])
@@ -24,37 +25,61 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- x2 x1)))
 
 (defn height [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- y2 y1)))
 
 (defn square? [rectangle]
-  :-)
+  (let [size1 (width rectangle)
+        size2 (height rectangle)]
+    (if (= size1 size2)
+      true
+      false)))
 
 (defn area [rectangle]
-  :-)
+  (let [x (width rectangle)
+        y (height rectangle)]
+    (* x y)))
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle
+        [coordx coordy] point]
+    (if (and (>= x2 coordx x1) (>= y2 coordy y1))
+      true
+      false)))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[pointx pointy]  inner]
+    (if (and (contains-point? outer pointx)
+             (contains-point? outer pointy))
+      true
+      false)))
 
 (defn title-length [book]
-  :-)
+  (count (get book :title)))
 
 (defn author-count [book]
-  :-)
+  (count (get book :authors)))
 
 (defn multiple-authors? [book]
-  :-)
+  (let [result (author-count book)]
+    (if (> result 1)
+      true
+      false)))
 
 (defn add-author [book new-author]
-  :-)
+  (let [old (get book :authors)
+        new (conj old new-author)]
+  (assoc book :authors new)))
 
 (defn alive? [author]
-  :-)
+  (let [result (get author :death-year)]
+  (if (nil? result)
+    true
+    false)))
 
 (defn element-lengths [collection]
   :-)
