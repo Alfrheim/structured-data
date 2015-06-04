@@ -82,25 +82,38 @@
     false)))
 
 (defn element-lengths [collection]
-  :-)
+  (let [countElements (fn [x] (count x))]
+    (map countElements collection)))
 
 (defn second-elements [collection]
-  :-)
+  (let [element (fn [x] (second x))]
+    (map element collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (let [increase (apply <= a-seq)
+        decrease (apply >= a-seq)]
+    (if increase
+      increase
+      decrease)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
+
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let [setSize (count(set a-seq))
+        seqSize (count a-seq)]
+    (if (= setSize seqSize)
+      false
+      true)))
 
 (defn old-book->new-book [book]
   :-)
